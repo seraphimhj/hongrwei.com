@@ -1,0 +1,41 @@
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script> -->
+<!--script src="{{ root_url }}/bootstrap/js/jquery.js"></script> 
+<script src="{{ root_url }}/bootstrap/js/bootstrap-carousel.js"></script> 
+<script src="{{ root_url }}/bootstrap/js/bootstrap-transition.js"></script> 
+<script type="text/javascript">
+    $(function(){
+        // Initialize the carousels:
+        $('.carousel').carousel({
+            duration: 600 // default
+            , easing: 'easeInOutExpo' // default is 'swing'
+            , adjustHeight: true // default
+        })   
+    });
+</script--> 
+
+<!-- Use Advanced Slider instead, -->
+<!-- Ref: http://4vm.net/AdvancedSlider/documentation/documentation.html -->
+<script type="text/javascript" src="{{ root_url }}/javascripts/jquery.advancedSlide.js"></script>
+<script type="text/javascript">
+    $(function() {
+            $('.slider').advancedSlider({
+        width:934, 
+        height:345, 
+        //shuffle:true, 
+        slideshowControls:false,
+        slideshowControlsToggle:false,
+        pauseSlideshowOnHover:false, 
+        captionBackgroundOpacity:0.8,
+        timerAnimation:false,
+        slideProperties:{
+            0:{effectType:'height', horizontalSlices:'1', verticalSlices:'15', slicePattern:'topToBottom', captionShowEffect:'slide', captionSize:'35'},
+            1:{effectType:'height', horizontalSlices:'1', verticalSlices:'15', slicePattern:'bottomToTop', slicePoint:'centerTop',sliceDuration:'700',captionShowEffect:'slide', captionSize:'35'},
+            2:{effectType:'slide', horizontalSlices:'25', verticalSlices:'1', slicePattern:'leftToRight', captionShowEffect:'slide', captionSize:'35'},
+            3:{effectType:'slide', horizontalSlices:'25', verticalSlices:'1', slicePattern:'rightToLeft', captionShowEffect:'slide', captionSize:'35'},
+            }
+            });
+        });
+</script>                 

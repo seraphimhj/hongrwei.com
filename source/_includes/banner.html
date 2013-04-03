@@ -1,0 +1,52 @@
+{% if site.twitter_user and site.twitter_tweet_count > 0 %}
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	mall><a href="http://twitter.com/{{ site.twitter_user }}">{{ site.twitter_user }}</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="{{ root_url }}/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('{{ site.twitter_user }}', {{ site.twitter_tweet_count }}, {{ site.twitter_show_replies }});
+	})(jQuery);
+</script>
+{% endif %}
+
+<div class="container">
+    <div class="span8">
+        <div id="carousel" class="carousel" >
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+                <div class="active item"><img src="/images/products/hr001_800.jpg" alt=""/>
+                    <div class="carousel-caption">
+                        <h4>ZH-900C型高速自动纸盒糊盒机</h4>
+                    </div>
+                </div>
+                <div class="item"><img src="/images/products/hr002_800.jpg" alt=""/>
+                    <div class="carousel-caption">
+                        <h4>ZH-900型高速自动纸盒糊盒机</h4>
+                    </div> 
+                </div>
+                <div class="item"><img src="/images/products/hr003_800.jpg" alt=""/>
+                    <div class="carousel-caption">
+                        <h4>ZH-900B型高速自动纸盒糊盒机</h4>
+                    </div>
+                </div> 
+                <div class="item"><img src="/images/products/hr004_800.jpg" alt=""/>
+                    <div class="carousel-caption">
+                        <h4>ES-800AC型高速全自动糊折盒机</h4>                        
+                    </div>
+                </div> 
+            </div>
+            <!-- Carousel nav -->
+            <a class="carousel-control left" href="#carousel" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#carousel" data-slide="next">&rsaquo;</a>
+            <!-- <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p> -->
+        </div>
+    </div>
+</div>
+    <!-- div class="span2 offset8">
+        <p>This is aside bar</p>
+    </div-->

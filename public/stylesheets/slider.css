@@ -1,0 +1,311 @@
+.advanced-slider
+{
+	position:relative;
+	overflow:visible;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+
+.advanced-slider *
+{
+	margin:0px;
+	padding:0px;
+}
+
+
+.slider-item
+{
+	position:absolute;
+	left:-9999px;	
+}
+
+
+.advanced-slider .slide-wrapper
+{
+	position:absolute;
+	overflow:visible;
+	z-index:2;
+}
+
+
+.advanced-slider .slide
+{
+	position:absolute;
+	width: 100%;
+	height: 100%;
+	z-index:10;
+}
+
+
+.advanced-slider .slice
+{
+	display:block;
+	position:absolute;
+}
+
+
+.advanced-slider .preloader
+{
+	position:absolute;
+	z-index:15;
+}
+
+
+.advanced-slider .navigation-arrows a
+{
+	position:absolute;
+	z-index:30;
+	cursor:pointer;
+}
+
+
+.advanced-slider .slideshow-controls
+{
+	position:absolute;
+	z-index:40;
+	cursor:pointer;
+}
+
+
+.advanced-slider .shadow
+{
+	position:absolute;
+	z-index:1;
+}
+
+
+.advanced-slider .shadow .shadow-left, .advanced-slider .shadow .shadow-right, .advanced-slider .shadow .shadow-middle
+{
+	float:left;
+}
+
+
+.advanced-slider .timer-animation
+{
+	position:absolute;
+	z-index:60;
+}
+
+
+
+.advanced-slider .caption
+{
+	overflow:hidden;
+	position:absolute;
+	z-index:20;
+}
+
+
+.advanced-slider .caption .wrapper
+{
+	position:absolute;
+}
+
+
+.advanced-slider .caption .background
+{
+	position:absolute;
+	z-index:10;
+	width:100%;
+	height:100%;
+}
+
+
+.advanced-slider .caption .content
+{	
+	position:absolute;
+	z-index:20;
+}
+
+
+.advanced-slider .thumbnail
+{
+	position:relative;
+	overflow:hidden;
+}
+
+
+.advanced-slider .navigation-buttons
+{
+	position:absolute;
+	z-index:50;
+}
+
+
+.advanced-slider .navigation-buttons .left, .advanced-slider .navigation-buttons .right, .advanced-slider .navigation-buttons .middle
+{
+	float:left;
+}
+
+
+.advanced-slider .buttons a
+{
+	position:relative;
+	cursor:pointer;
+	float:left;
+}
+
+
+.advanced-slider .buttons .thumbnail
+{
+	position:absolute;
+}
+
+.advanced-slider .navigation-thumbnails
+{
+	position:absolute;
+	z-index:3;
+}
+
+
+.advanced-slider .navigation-thumbnails .visible-container
+{
+	position:absolute;
+	overflow:hidden;
+}
+
+
+.advanced-slider .navigation-thumbnails .container
+{
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+
+
+.advanced-slider .navigation-thumbnails .thumbnail
+{
+	cursor:pointer;
+	position:absolute;
+}
+
+
+.advanced-slider .thumbnail .caption
+{
+	position:absolute;
+	width:100%;
+}
+
+
+.advanced-slider .thumbnail .caption .background
+{
+	position:absolute;	
+	width:100%;
+	height:100%;
+	z-index:10;
+}
+
+
+.advanced-slider .thumbnail .caption .content
+{
+	position:absolute;
+	width:100%;
+	z-index:20;
+}
+
+
+.advanced-slider .navigation-thumbnails .arrows a
+{
+	position:absolute;
+	cursor:pointer;
+}
+
+
+.advanced-slider .navigation-thumbnails .buttons
+{
+	position:absolute;
+}
+
+
+.advanced-slider .navigation-thumbnails .buttons a
+{	
+	position:absolute;
+	cursor:pointer;
+}
+
+
+.advanced-slider .tooltip
+{
+	position:absolute;
+	z-index:9999;
+}
+
+
+.slide-wrapper
+{
+	background-color:#FFF;
+	border:7px solid #FFF;
+	-moz-box-shadow: 0px 0px 10px #CCC;
+	-webkit-box-shadow: 0px 0px 10px #CCC;
+	box-shadow: 0px 0px 10px #CCC;
+}
+.shadow-left,.shadow-right{
+	width: 200px;
+	height: 94px;
+	float: left;
+}
+.shadow-middle{
+	width: 546px;
+	float: left;
+	background: url(../images/shadow_middle.png) repeat-x;
+	height: 94px;
+}
+.shadow-left{
+	background: url(../images/shadow_left.png);
+}
+.shadow-right{
+	background: url(../images/shadow_right.png);
+}
+.navigation-arrows a.previous
+{
+	background:url(../images/slider-arrow-left.png) no-repeat;
+	left:-10px;
+}
+.navigation-arrows a.next
+{
+	background:url(../images/slider-arrow-right.png) no-repeat;
+	right:-3px;
+}
+.slideshow-controls
+{
+	background:url(../images/playpause.png) no-repeat;
+	width:38px;
+	height:38px;
+	top:50%;
+	left:50%;
+	margin-top:-19px;
+	margin-left:-19px;
+}
+.timer-animation
+{
+	top:20px;
+	right:20px;
+}
+.slideshow-controls.pause
+{
+	background-position: 0px 0px;
+}
+.slideshow-controls.play
+{
+	background-position: -38px 0px;
+}
+.navigation-arrows a
+{
+        width:50px;
+	height:60px;
+	top:50%;
+	margin-top:-19px;
+}
+.shadow
+{	
+	height:94px;
+	margin-top:-50px;
+}
+.caption{
+	color: white;
+	font-size: 18px;
+	line-height: 35px;
+}
+.caption .content{
+	padding-left: 20px;
+}
