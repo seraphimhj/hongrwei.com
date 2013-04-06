@@ -9,6 +9,7 @@ body{
 	font-weight: 300;
 	font-size: 14px;
 	background: $color-background;
+	background-image: url(../images/background.jpg);
 	color: $color-gray01;
 	@media screen and (max-width: 1040px){
 		margin: 0 20px;

@@ -1,6 +1,28 @@
-Copyright &copy; {{ site.time | date: "%Y" }}
-{% if site.author %}
-    {{ site.author }}
-{% else %}
-    {{ site.title }}
-{% endif %}
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span4">
+            <div>
+                产品导航：
+            </div>
+            {% for post in site.posts %}
+            <a href="{{ post.url }}"> {{ post.title }} </br></a>
+            {% endfor %} 
+        </div>
+        <div class="span4">
+            联系人：黄先生  
+            <br>         
+            手机：138-0680-9666
+            <br>
+            电话：0577-65665666
+            <br>
+            传真：0577-65671665
+            <br>
+            浙江省温州市瑞安愚溪工业区锦源北路35号
+        </div>              
+        <div class="span4">
+            版权所有&copy; {{ site.time | date: "%Y" }}
+            <br>
+            瑞安市鸿瑞包装机械有限公司
+        </div>  
+    </div>                       
+</div> 

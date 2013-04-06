@@ -1,8 +1,32 @@
 <div class="h_top">
-    <a href="{{ root_url }}/">
-        <img src="{{ root_url }}/images/banner.png" alt="logo" />
-    </a>
-    <img src="{{ root_url }}/images/logo.png" alt="sitename" />
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2"> 
+                <a href="{{ root_url }}/">
+                    <img src="{{ root_url }}/images/banner.png" alt="logo" />
+                </a>
+            </div>
+            <div class="span6"> 
+                <a href="{{ root_url }}/">
+                    <img src="{{ root_url }}/images/logo.png" alt="sitename" />
+                </a>                      
+            </div> 
+            <div class="pull-right"> 
+                <br>
+                <div class="btn btn-link">
+                    <a title="瑞安市鸿瑞包装机械有限公司!(www.hongrwei.com)" onclick="addFav()" href="{{ root_url }}">
+                        收藏本站
+                    </a>
+                </div>
+                <div class="btn btn-link">
+                    <a href="/sitemap.xml">网站地图</a>
+                </div>
+                <br>
+                服务热线：0577-65665666
+            </div>   
+        </div>
+    </div>
+    <div >
 </div>
 <nav id="main-nav">{% include navigation.html %}</nav>
 <nav id="mobile-nav">
