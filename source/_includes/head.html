@@ -15,9 +15,11 @@
 	<link href="{{ site.subscribe_rss }}" rel="alternate" title="{{site.title}}" type="application/atom+xml">
 	<link rel="canonical" href="{{ canonical }}">
 	<link href="{{ root_url }}/favicon.ico" rel="shortcut icon">
-	<link href="{{ root_url }}/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<link href="{{ root_url }}/stylesheets/custom.css" rel="stylesheet" type="text/css">
-        <link href="{{ root_url }}/stylesheets/slider.css" rel="stylesheet" type="text/css">
-        <link href="{{ root_url }}/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-	{% include custom/head.html %}
+	<link href="{{ root_url }}/stylesheets/all.1304090138.css" media="screen, projection" rel="stylesheet" type="text/css">
+        {% include custom/head.html %}
+        <!-- DNS Prefetching for A-grade browsers -->
+        <link href="//platform.twitter.com" rel="dns-prefetch" />
+        <link href="//hnbutton.appspot.com" rel="dns-prefetch" />
+        <link href="//apis.google.com" rel="dns-prefetch" />
+        <link href="//reddit.com" rel="dns-prefetch" />
 </head>

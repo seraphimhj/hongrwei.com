@@ -25,6 +25,7 @@ themes_dir      = ".themes"   # directory for blog files
 new_post_ext    = "markdown"  # default new post file extension when using the new_post task
 new_page_ext    = "markdown"  # default new page file extension when using the new_page task
 server_port     = "4000"      # port for preview server eg. localhost:4000
+asset_version   = Time.new.strftime("%y%m%d%H%M") # For asset versioning
 
 
 desc "Initial setup for Octopress: copies the default theme into the path of Jekyll's generator. Rake install defaults to rake install[classic] to install a different theme run rake install[some_theme_name]"
@@ -48,12 +49,42 @@ end
 #######################
 
 desc "Generate jekyll site"
-task :generate do
+task :generate => [:sass, :update_asset_versions, :jekyll, :combine, :minify]
+# task :generate => [:sass, :update_asset_versions, :jekyll, :combine, :minify, :gzip]
+
+desc "sass"
+task :sass do
+  raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
+  puts "## Generating CSS with Compass"
+  system "compass compile --css-dir #{source_dir}/stylesheets"
+end
+
+desc "jekyll"
+task :jekyll do
   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
   puts "## Generating Site with Jekyll"
-  system "compass compile --css-dir #{source_dir}/stylesheets"
   system "jekyll"
 end
+
+desc "Update head include for static assets"
+task :update_asset_versions do
+    puts "## Updating asset versions"
+    # Replace instances of all.js and all.1234.js with all.{version}.js
+    content = ''  
+    File.open("#{source_dir}/_includes/head.html", 'r') do |file|
+        content = file.read.gsub(/all(\.\d+)?\./, "all.#{asset_version}.")
+    end
+    File.open("#{source_dir}/_includes/head.html", 'w') do |file|
+        file.write(content)
+    end           
+    File.open("#{source_dir}/_includes/after_footer.html", 'r') do |file|
+        content = file.read.gsub(/all(\.\d+)?\./, "all.#{asset_version}.")
+    end
+    File.open("#{source_dir}/_includes/after_footer.html", 'w') do |file|
+        file.write(content)
+    end
+end
+
 
 desc "Watch the site and regenerate when it changes"
 task :watch do
@@ -201,6 +232,84 @@ task :update_source, :theme do |t, args|
   cp "#{source_dir}.old/index.html", source_dir if blog_index_dir != source_dir && File.exists?("#{source_dir}.old/index.html")
   puts "## Updated #{source_dir} ##"
 end
+
+############################
+# Performace Optimization  #
+############################
+
+desc "Combine CSS"
+task :combine_css do
+    puts "## Combining CSS"
+    styles_dir = "#{source_dir}/stylesheets"
+    # Watch out! Order of files matters here!
+    system "cat #{styles_dir}/screen.css #{styles_dir}/custom.css #{styles_dir}/slider.css #{source_dir}/bootstrap/css/bootstrap.min.css > #{styles_dir}/all.css"
+end
+
+desc "Combine JS"
+task :combine_js do
+    puts "## Combining JS"
+    scripts_dir = "#{source_dir}/javascripts"
+    bootstrap_js_dir = "#{source_dir}/bootstrap/js"
+    system "cat #{scripts_dir}/jquery.min.js #{bootstrap_js_dir}/bootstrap-tooltip.js #{bootstrap_js_dir}/bootstrap-popover.js #{bootstrap_js_dir}/bootstrap-transition.js #{bootstrap_js_dir}/bootstrap-collapse.js #{scripts_dir}/slash.js #{scripts_dir}/my.js > #{scripts_dir}/all.js"
+end
+
+desc "Combine CSS/JS"
+task :combine => [:combine_css, :combine_js]
+
+
+desc "Minify CSS"
+task :minify_css do
+    puts "## Minifying CSS"
+    input = "#{source_dir}/stylesheets/all.css"
+    output = "#{public_dir}/stylesheets/all.#{asset_version}.css"
+    system "cleancss -e -o #{output} #{input}"
+end
+
+desc "Minify JS"
+task :minify_js do
+    puts "## Minifying JS"
+    input = "#{source_dir}/javascripts/all.js"
+    output = "#{source_dir}/javascripts/all.#{asset_version}.js"
+    source_map_option = "--source-map #{source_dir}/javascripts/all.#{asset_version}.js.map"
+    source_map_root_option = "--source-map-root http://www.hongrwei.com"
+    system "uglifyjs #{input} -o #{output} #{source_map_option} #{source_map_root_option} -p 2 -m -c warnings=false"
+    Dir.glob("#{source_dir}/javascripts/all.*").each do |f|
+        FileUtils.mv(f, "#{public_dir}/javascripts")
+    end
+end
+
+desc "Minify CSS/JS"
+task :minify => [:minify_css, :minify_js]
+
+
+desc "GZip HTML"
+task :gzip_html do
+    puts "## GZipping HTML"
+    system 'find public/ -type f -name \*.html -exec gzip -9 {} \;'
+    # Batch rename .html.gz to .html
+    Dir['**/*.html.gz'].each do |f|
+        test(?f, f) and File.rename(f, f.gsub(/\.html\.gz/, '.html'))
+    end
+end
+
+desc "GZip CSS"
+task :gzip_css do
+    puts "## GZipping CSS"
+    styles_dir = "#{public_dir}/stylesheets"
+    system "gzip -9 #{styles_dir}/all.#{asset_version}.css"
+    system "mv #{styles_dir}/all.#{asset_version}.css{.gz,}"
+end
+
+desc "GZip JS"
+task :gzip_js do
+    puts "## GZipping JS"
+    scripts_dir = "#{public_dir}/javascripts"
+    system "gzip -9 #{scripts_dir}/all.#{asset_version}.js"
+    system "mv #{scripts_dir}/all.#{asset_version}.js{.gz,}"
+end
+
+desc "GZip All"
+task :gzip => [:gzip_html, :gzip_css, :gzip_js]
 
 ##############
 # Deploying  #
