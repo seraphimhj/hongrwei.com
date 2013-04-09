@@ -6,4 +6,16 @@
     <div class="span1"><a href="{{ root_url }}/sellnet">销售网络</a></div>
     <div class="span1"><a href="{{ root_url }}/message">客户留言</a></div>
     <div class="span1"><a href="{{ root_url }}/contact">联系我们</a></div>
-</div>
+    <div id="sub-nav" class="offset1 pull-right">
+        <div class="social">
+            <a class="email" href="mailto:{{ site.email_addr }}" title="Mail">Mail</a>
+            {% if site.subscribe_rss %}
+            <a class="rss" href="{{ site.subscribe_rss }}" title="RSS">RSS</a>
+            {% endif %}
+        </div>
+        <form class="search" action="{{ site.simple_search }}" method="get">
+            <input class="alignright" type="text" name="q" results="0">
+            <input type="hidden" name="q" value="site:{{ site.url | shorthand_url }}">
+        </form> 
+    </div> 
+</div> 

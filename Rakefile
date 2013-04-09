@@ -27,7 +27,6 @@ new_page_ext    = "markdown"  # default new page file extension when using the n
 server_port     = "4000"      # port for preview server eg. localhost:4000
 asset_version   = Time.new.strftime("%y%m%d%H%M") # For asset versioning
 
-
 desc "Initial setup for Octopress: copies the default theme into the path of Jekyll's generator. Rake install defaults to rake install[classic] to install a different theme run rake install[some_theme_name]"
 task :install, :theme do |t, args|
   if File.directory?(source_dir) || File.directory?("sass")
@@ -50,6 +49,7 @@ end
 
 desc "Generate jekyll site"
 task :generate => [:sass, :update_asset_versions, :jekyll, :combine, :minify]
+task :dgenerate => [:sass, :update_asset_versions, :jekyll, :combine, :debug]
 # task :generate => [:sass, :update_asset_versions, :jekyll, :combine, :minify, :gzip]
 
 desc "sass"
@@ -84,7 +84,6 @@ task :update_asset_versions do
         file.write(content)
     end
 end
-
 
 desc "Watch the site and regenerate when it changes"
 task :watch do
@@ -256,6 +255,16 @@ end
 desc "Combine CSS/JS"
 task :combine => [:combine_css, :combine_js]
 
+desc "For Debug JS"
+task :debug do
+    puts "## Debug JS"
+    input = "#{source_dir}/stylesheets/all.css"
+    output = "#{public_dir}/stylesheets/all.#{asset_version}.css"
+    system "mv #{input} #{output}"
+    input = "#{source_dir}/javascripts/all.js"
+    output = "#{public_dir}/javascripts/all.#{asset_version}.js"
+    system "mv #{input} #{output}" 
+end
 
 desc "Minify CSS"
 task :minify_css do

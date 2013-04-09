@@ -18,14 +18,15 @@ $(function ()  {
   //   $(this).collapse("hide");
   // });
   
-  var addFav = function() {
+}); 
+
+function addFav(title, url) {
     if (document.all) {
-      window.external.addFavorite(this.href, this.title);
+      window.external.addFavorite(url, title);
     } else if (window.sidebar) {
-      window.sidebar.addPanel(this.title, this.href, "");
+      window.sidebar.addPanel(title, url, "");
     }
-  }; 
-});  
+};  
  
 
  
